@@ -25,19 +25,18 @@ body {
     align-items:center;
     z-index:1000;
     cursor:pointer;
-    transition:1s;
 }
 
 .entry h1 {
-    font-size:70px;
-    letter-spacing:8px;
+    font-size:80px;
+    letter-spacing:10px;
     animation:enterAnim 2s infinite;
 }
 
 @keyframes enterAnim {
-    0% {opacity:0.4; transform:scale(0.95);}
-    50% {opacity:1; transform:scale(1.05);}
-    100% {opacity:0.4; transform:scale(0.95);}
+    0% {opacity:0.3; transform:scale(0.9);}
+    50% {opacity:1; transform:scale(1.15);}
+    100% {opacity:0.3; transform:scale(0.9);}
 }
 
 /* ================= HERO ================= */
@@ -77,19 +76,19 @@ body {
 
 @keyframes bounce {
     0%,100% {transform:translateY(0);}
-    50% {transform:translateY(10px);}
+    50% {transform:translateY(12px);}
 }
 
 /* ================= SECTION ================= */
 .section {
-    padding:50px 6%;
+    padding:60px 6%;
 }
 
 /* TITLE */
 .name {
     text-align:center;
-    font-size:26px;
-    margin-bottom:25px;
+    font-size:28px;
+    margin-bottom:30px;
     color:#aaa;
 }
 
@@ -104,7 +103,7 @@ body {
     width:100%;
     height:100%;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
 }
 
 /* ================= SHORTS ================= */
@@ -115,23 +114,20 @@ body {
     justify-items:center;
 }
 
-/* SMALLER SHORTS */
 .shorts iframe {
-    width:85%; /* smaller */
+    width:80%;
     aspect-ratio:9/16;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     transition:0.3s;
 }
 
-/* hover */
 .shorts iframe:hover {
     transform:scale(1.05);
 }
 
 /* MOBILE */
 @media(max-width:768px){
-
     .shorts {
         grid-template-columns:1fr;
     }
@@ -145,37 +141,75 @@ body {
     }
 }
 
-/* ================= CONTACT ================= */
+/* ================= INSANE CTA ================= */
 .contact {
-    padding:80px 20px;
+    padding:140px 20px;
     text-align:center;
 }
 
-/* BIG CTA */
+/* TEXT */
 .contact h2 {
-    font-size:32px;
-    margin-bottom:25px;
+    font-size: clamp(32px, 5vw, 70px);
+    margin-bottom:60px;
 }
 
-/* BUTTON */
-.email {
+/* CTA BUTTON */
+.cta {
+    position:relative;
     display:inline-block;
-    padding:16px 30px;
-    border:1px solid #555;
-    border-radius:50px;
-    color:white;
+    padding:25px 60px;
+    font-size:20px;
+    letter-spacing:3px;
     text-decoration:none;
-    font-size:16px;
-    letter-spacing:1px;
+    color:white;
+    border-radius:60px;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,0.2);
     transition:0.3s;
 }
 
-/* HOVER EFFECT */
-.email:hover {
+/* GLOW BACKGROUND */
+.cta::after {
+    content:'';
+    position:absolute;
+    inset:-5px;
+    background:radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+    opacity:0;
+    transition:0.4s;
+}
+
+/* LIGHT SWEEP */
+.cta::before {
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition:0.7s;
+}
+
+/* HOVER */
+.cta:hover::before {
+    left:100%;
+}
+
+.cta:hover::after {
+    opacity:1;
+}
+
+.cta:hover {
+    transform:scale(1.12);
     background:white;
     color:black;
-    box-shadow:0 0 25px rgba(255,255,255,0.4);
-    transform:scale(1.08);
+    box-shadow:0 0 60px rgba(255,255,255,0.4);
+}
+
+/* ================= SCRIPT ANIMATION ================= */
+.fade-out {
+    opacity:0;
+    transition:0.8s;
 }
 </style>
 </head>
@@ -199,7 +233,7 @@ body {
 
     <div class="name">Editing Showcase</div>
 
-    <!-- LONG VIDEOS -->
+    <!-- LONG -->
     <div class="video">
         <iframe src="https://www.youtube.com/embed/7iF0aMuY6PI"></iframe>
     </div>
@@ -218,21 +252,22 @@ body {
 
 </div>
 
-<!-- CONTACT -->
+<!-- INSANE CTA -->
 <div class="contact">
-    <h2>Let’s create something powerful.</h2>
+    <h2>Let’s create something impossible to ignore.</h2>
 
-    <a href="https://mail.google.com/mail/?view=cm&to=takkelapallyharshith5@gmail.com" target="_blank" class="email">
-        CONTACT ME
+    <a href="https://mail.google.com/mail/?view=cm&to=takkelapallyharshith5@gmail.com" 
+       target="_blank" 
+       class="cta">
+        LET’S WORK →
     </a>
 </div>
 
 <script>
 function enterSite(){
-    document.querySelector('.entry').style.opacity="0";
-    setTimeout(()=> {
-        document.querySelector('.entry').style.display="none";
-    },800);
+    const entry = document.querySelector('.entry');
+    entry.classList.add('fade-out');
+    setTimeout(()=> entry.style.display="none",800);
 }
 </script>
 
