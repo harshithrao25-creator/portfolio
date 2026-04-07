@@ -27,12 +27,7 @@ body {
     transition:1s;
 }
 
-.entry h1 {
-    font-size:40px;
-    letter-spacing:3px;
-}
-
-/* HERO TEXT */
+/* HERO */
 .hero {
     height:100vh;
     display:flex;
@@ -44,16 +39,14 @@ body {
 
 .hero h1 {
     font-size: clamp(40px, 8vw, 100px);
-    color:#fff;
 }
 
 .hero h2 {
     font-size: clamp(40px, 8vw, 100px);
     color:#666;
-    margin-top:10px;
 }
 
-/* FADE ANIMATION */
+/* FADE */
 .hero h1 {
     opacity:0;
     animation:fadeIn 1.5s forwards;
@@ -69,35 +62,22 @@ body {
     to {opacity:1;}
 }
 
-/* SCROLL ARROW */
-.arrow {
-    position:absolute;
-    bottom:40px;
-    font-size:30px;
-    opacity:0.6;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%,100% {transform:translateY(0);}
-    50% {transform:translateY(10px);}
-}
-
 /* SECTION */
 .section {
-    padding:100px 10%;
+    padding:80px 10%;
 }
 
-/* NAME SECTION (comes later) */
+/* TITLE */
 .name {
     text-align:center;
-    font-size:50px;
-    margin-bottom:50px;
+    font-size:35px;
+    margin-bottom:40px;
+    color:#ccc;
 }
 
-/* VIDEOS */
+/* VIDEO */
 .video {
-    margin:80px 0;
+    margin:60px 0;
     display:flex;
     justify-content:center;
     opacity:0;
@@ -116,20 +96,28 @@ body {
     height:500px;
 }
 
-/* SHORTS */
-.video.vertical iframe {
-    width:360px;
-    height:640px;
+/* SHORT GRID (2 PER ROW) */
+.shorts {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:30px;
+    justify-items:center;
+}
+
+.shorts iframe {
+    width:100%;
+    max-width:350px;
+    height:600px;
 }
 
 /* CONTACT */
 .contact {
-    padding:120px 20px;
+    padding:80px 20px; /* reduced gap */
     text-align:center;
 }
 
 .contact h2 {
-    font-size:30px;
+    font-size:28px;
     margin-bottom:20px;
 }
 
@@ -151,7 +139,7 @@ body {
     transform:scale(1.05);
 }
 
-/* FADE */
+/* FADE OUT */
 .fade-out {
     opacity:0;
     pointer-events:none;
@@ -170,16 +158,14 @@ body {
 <div class="hero">
     <h1>I don’t edit.</h1>
     <h2>I control emotion.</h2>
-
-    <div class="arrow">↓</div>
 </div>
 
-<!-- NAME (comes after scroll) -->
+<!-- CONTENT -->
 <div class="section">
-    <div class="name">HARSHITH</div>
 
-    <!-- VIDEOS -->
+    <div class="name">Editing Showcase</div>
 
+    <!-- LONG VIDEOS -->
     <div class="video wide">
         <iframe src="https://www.youtube.com/embed/7iF0aMuY6PI"></iframe>
     </div>
@@ -188,20 +174,14 @@ body {
         <iframe src="https://www.youtube.com/embed/FFuEp2kLN2I"></iframe>
     </div>
 
-    <div class="video vertical">
+    <!-- SHORTS (2 PER ROW) -->
+    <div class="shorts">
+
         <iframe src="https://www.youtube.com/embed/yFfvWJ4ijwo"></iframe>
-    </div>
-
-    <div class="video vertical">
         <iframe src="https://www.youtube.com/embed/Vbdw70LQgwA"></iframe>
-    </div>
-
-    <div class="video vertical">
         <iframe src="https://www.youtube.com/embed/Uxw-Vk4BZQQ"></iframe>
-    </div>
-
-    <div class="video vertical">
         <iframe src="https://www.youtube.com/embed/RaEjQFuOjyA"></iframe>
+
     </div>
 
 </div>
