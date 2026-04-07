@@ -9,101 +9,160 @@
 * {margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
 body {
-    background: black;
-    color: white;
+    background:black;
+    color:white;
+    overflow-x:hidden;
 }
 
+/* ENTRY SCREEN */
+.entry {
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    cursor:pointer;
+    transition:1s;
+}
+
+.entry h1 {
+    font-size:40px;
+    letter-spacing:3px;
+    opacity:0.8;
+}
+
+/* HERO */
 .hero {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: radial-gradient(circle, #111, #000);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
 .hero h1 {
-    font-size: 70px;
-    letter-spacing: 5px;
+    font-size: clamp(40px, 8vw, 100px);
+    line-height:1.1;
 }
 
-.quote {
-    text-align: center;
-    padding: 60px 20px;
-    font-size: 22px;
-    color: #aaa;
-    font-style: italic;
+.hero span {
+    color:#777;
 }
 
+/* TEXT SECTION */
 .section {
-    padding: 60px 10%;
+    padding:120px 15%;
 }
 
-h2 {
-    margin-bottom: 30px;
+.big {
+    font-size: clamp(30px, 5vw, 70px);
+    line-height:1.2;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+/* VIDEO */
+.video {
+    margin-top:100px;
+    opacity:0;
+    transform:translateY(80px);
+    transition:1.2s ease;
 }
 
-iframe {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-    border: none;
+.video iframe {
+    width:100%;
+    height:450px;
+    border:none;
 }
 
+.video.show {
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* CONTACT */
 .contact {
-    text-align: center;
-    padding: 50px;
-    border-top: 1px solid #222;
+    padding:120px;
+    text-align:center;
 }
+
+.contact h2 {
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+/* FADE */
+.fade-out {
+    opacity:0;
+    pointer-events:none;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- ENTRY -->
+<div class="entry" onclick="enterSite()">
+    <h1>ENTER</h1>
+</div>
+
+<!-- HERO -->
 <div class="hero">
-    <div>
-        <h1>HARSHIH</h1>
-        <p>Video Editor</p>
-    </div>
+    <h1>
+        I don’t edit.<br>
+        <span>I control emotion.</span>
+    </h1>
 </div>
 
-<div class="quote">
-    “I don’t just edit videos — I create moments people feel.”
-</div>
-
+<!-- TEXT -->
 <div class="section">
-    <h2>Editing Showcase</h2>
-
-    <div class="grid">
-
-        <!-- OLD VIDEOS -->
-        <iframe src="https://www.youtube.com/embed/7iF0aMuY6PI"></iframe>
-        <iframe src="https://www.youtube.com/embed/FFuEp2kLN2I"></iframe>
-        <iframe src="https://www.youtube.com/embed/yFfvWJ4ijwo"></iframe>
-
-        <!-- NEW SHORTS -->
-        <iframe src="https://www.youtube.com/embed/Vbdw70LQgwA"></iframe>
-        <iframe src="https://www.youtube.com/embed/Uxw-Vk4BZQQ"></iframe>
-        <iframe src="https://www.youtube.com/embed/RaEjQFuOjyA"></iframe>
-
+    <div class="big">
+        People don’t remember videos.<br><br>
+        They remember how it made them feel.
     </div>
 </div>
 
-<div class="section" style="text-align:center;">
-    <h2>About</h2>
-    <p>5+ years of experience creating cinematic and emotional edits.</p>
+<!-- VIDEOS -->
+<div class="section video">
+    <iframe src="https://www.youtube.com/embed/7iF0aMuY6PI"></iframe>
 </div>
 
-<div class="contact">
-    <h2>Contact</h2>
-    <p>Email: takkelapallyharshith5@gmail.com</p>
+<div class="section video">
+    <iframe src="https://www.youtube.com/embed/FFuEp2kLN2I"></iframe>
 </div>
+
+<div class="section video">
+    <iframe src="https://www.youtube.com/embed/Vbdw70LQgwA"></iframe>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+    <h2>Let’s make something impossible to ignore.</h2>
+    <p>takkelapallyharshith5@gmail.com</p>
+</div>
+
+<script>
+
+// ENTER EFFECT
+function enterSite(){
+    document.querySelector('.entry').classList.add('fade-out');
+}
+
+// SCROLL REVEAL
+const videos = document.querySelectorAll('.video');
+
+window.addEventListener('scroll', () => {
+    videos.forEach(v => {
+        const top = v.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            v.classList.add('show');
+        }
+    });
+});
+
+</script>
 
 </body>
 </html>
