@@ -3,63 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harshih Takkelapally</title>
+<title>Harshih</title>
 
 <style>
+* {margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
 body {
-    margin: 0;
-    font-family: Arial;
     background: black;
     color: white;
 }
 
-header {
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle, #111, #000);
+}
+
+.hero h1 {
+    font-size: 70px;
+    letter-spacing: 5px;
+}
+
+/* QUOTE */
+.quote {
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(to right, #000, #1a1a1a);
+    font-size: 22px;
+    color: #aaa;
+    font-style: italic;
 }
 
-h1 {
-    font-size: 40px;
-}
-
+/* SECTION */
 .section {
-    padding: 40px;
-    text-align: center;
+    padding: 60px 10%;
 }
 
+h2 {
+    margin-bottom: 30px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* VIDEO */
 iframe {
-    width: 80%;
-    height: 400px;
-    margin-top: 20px;
+    width: 100%;
+    height: 250px;
     border-radius: 10px;
+    border: none;
+}
+
+/* CONTACT */
+.contact {
+    text-align: center;
+    padding: 50px;
+    border-top: 1px solid #222;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Harshih Takkelapally</h1>
-    <p>Video Editor | 5+ Years | DaVinci Resolve</p>
-</header>
+<div class="hero">
+    <div>
+        <h1>HARSHIH</h1>
+        <p>Video Editor</p>
+    </div>
+</div>
 
-<div class="section">
-    <h2>Showreel</h2>
-
-    <!-- PUT YOUR VIDEO LINK HERE -->
-    <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_LINK"></iframe>
-
+<div class="quote">
+    “I don’t just edit videos — I create moments people feel.”
 </div>
 
 <div class="section">
-    <h2>About Me</h2>
-    <p>I create high-quality edits for YouTube, reels and clients with 5+ years of experience.</p>
+    <h2>Selected Work</h2>
+
+    <div class="grid">
+
+        <iframe src="https://www.youtube.com/embed/7iF0aMuY6PI"></iframe>
+        <iframe src="https://www.youtube.com/embed/FFuEp2kLN2I"></iframe>
+        <iframe src="https://www.youtube.com/embed/yFfvWJ4ijwo"></iframe>
+
+    </div>
 </div>
 
-<div class="section">
+<div class="section" style="text-align:center;">
+    <h2>About</h2>
+    <p>5+ years of experience creating cinematic and emotional edits.</p>
+</div>
+
+<div class="contact">
     <h2>Contact</h2>
-    <p>Email: your@email.com</p>
+    <p>Email: takkelapallyharshith5@gmail.com</p>
 </div>
 
 </body>
