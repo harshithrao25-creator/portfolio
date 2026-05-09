@@ -680,45 +680,7 @@ function sendEmail(){
 
   });
   }
-  const body =
-    'Hi Harshith,\n\n' +
-    'I found your portfolio and I would love to work with you.\n\n' +
-    '--- PROJECT BRIEF ---\n' +
-    'Name: '    + name  + '\n' +
-    'Email: '   + email + '\n' +
-    'Service: ' + type  + '\n' +
-    (budget ? 'Budget: '   + budget + '\n' : '') +
-    (tline  ? 'Timeline: ' + tline  + '\n' : '') +
-    '\nProject Details:\n' + msg + '\n\n' +
-    'Looking forward to working with you!\n— ' + name;
-
-  const mailtoURL =
-    'mailto:takkelapallyharshith5@gmail.com' +
-    '?subject=' + encodeURIComponent(subject) +
-    '&body='    + encodeURIComponent(body);
-
-  /* Create a temporary invisible <a> and click it —
-     this is more reliable than window.location.href
-     and works even when the page is inside an iframe */
-  const link = document.createElement('a');
-  link.href = mailtoURL;
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-
-  ok.style.display = 'block';
-
-  setTimeout(()=>{
-    document.getElementById('f-name').value='';
-    document.getElementById('f-email').value='';
-    document.getElementById('f-type').value='';
-    document.getElementById('f-budget').value='';
-    document.getElementById('f-timeline').value='';
-    document.getElementById('f-msg').value='';
-    ok.style.display='none';
-  }, 3000);
-}
+ 
 </script>
 </body>
 </html>
