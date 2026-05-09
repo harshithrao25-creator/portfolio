@@ -611,74 +611,24 @@ document.querySelectorAll('.rv').forEach(el=>{
    This is the ONLY method guaranteed to open
    the user's email app on every device/browser.
 ══════════════════════════════════════════ */
+function sendEmail(){
+  const name   = (document.getElementById('f-name').value   || '').trim();
+  const email  = (document.getElementById('f-email').value  || '').trim();
+  const type   = (document.getElementById('f-type').value   || '').trim();
+  const budget = (document.getElementById('f-budget').value || '').trim();
+  const tline  = (document.getElementById('f-timeline').value|| '').trim();
+  const msg    = (document.getElementById('f-msg').value    || '').trim();
 
-<script>
-async function sendEmail(){
-
-  const name = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const type = document.getElementById('f-type').value;
-  const budget = document.getElementById('f-budget').value;
-  const tline = document.getElementById('f-timeline').value;
-  const msg = document.getElementById('f-msg').value.trim();
-
-  const ok = document.getElementById('fOk');
+  const ok  = document.getElementById('fOk');
   const err = document.getElementById('fErr');
-
   ok.style.display='none';
   err.style.display='none';
 
-  if(!name || !email || !type || !msg'){
+  if(!name || !email || !type || !msg){
     err.style.display='block';
     return;
   }
 
-  try{
-
-    const response = await fetch(
-      'https://formspree.io/f/YOUR_FORM_ID',
-      {
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-          'Accept':'application/json'
-        },
-        body:JSON.stringify({
-          name,
-          email,
-          service:type,
-          budget,
-          timeline:tline,
-          message:msg
-        })
-      }
-    );
-
-    if(response.ok){
-
-      ok.innerHTML='✓ Message sent successfully!';
-      ok.style.display='block';
-
-      document.getElementById('f-name').value='';
-      document.getElementById('f-email').value='';
-      document.getElementById('f-type').value='';
-      document.getElementById('f-budget').value='';
-      document.getElementById('f-timeline').value='';
-      document.getElementById('f-msg').value='';
-
-    }else{
-      throw new Error();
-    }
-
-  }catch(e){
-
-    err.innerHTML='⚠ Failed to send message.';
-    err.style.display='block';
-
-  }
-
-}
-</script>
   const subject = 'Project Inquiry from ' + name;
   const body =
     'Hi Harshith,\n\n' +
