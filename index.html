@@ -12,7 +12,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#07070a;--bg2:#0d0d11;--bg3:#131318;
-  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.11);
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
   --text:#edeae0;--muted:#56535f;--muted2:#8e8a98;
   --gold:#d4a853;--gold2:#f0c96e;--glow:rgba(212,168,83,0.12);
 }
@@ -21,12 +21,12 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;over
 
 /* CURSOR */
 #cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-#cur2{position:fixed;width:36px;height:36px;border:1px solid rgba(212,168,83,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
-body.hov #cur2{width:58px;height:58px;border-color:var(--gold)}
+#cur2{position:fixed;width:36px;height:36px;border:1px solid rgba(212,168,83,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
+body.hov #cur2{width:60px;height:60px;border-color:var(--gold)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:600;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-color:var(--border)}
+nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(20px);border-color:var(--border)}
 .nav-logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.1em;text-decoration:none;color:var(--text)}
 .nav-logo span{color:var(--gold)}
 .nav-links{display:flex;gap:40px;list-style:none}
@@ -73,53 +73,81 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(22px);-webkit-back
 .sec-h{font-family:'Anton',sans-serif;font-size:clamp(44px,6.5vw,92px);line-height:.88}
 .sec-h .it{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:var(--gold)}
 
-/* ═══ WORK / VIDEO GRID ═══ */
+/* ══════════════════════
+   VIDEO GRID
+   All cards are <a> tags that open videos in new tab.
+   No iframes. No embeds. No errors. Just works.
+══════════════════════ */
 .work{background:var(--bg2)}
 .work-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px}
 .work-cnt{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em}
 
-/* grid: 3 cols, cards click to open lightbox */
-.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.vcard{position:relative;overflow:hidden;background:#080810;cursor:none;aspect-ratio:16/9}
-.vcard.w2{grid-column:span 2;aspect-ratio:32/9}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 
-/* YouTube thumbnail shown as <img> — most reliable method */
-.vcard img.thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s}
-.vcard:hover img.thumb{transform:scale(1.07);filter:brightness(.35) saturate(.5)}
+/* every card is an <a> — perfect 16:9 always */
+.vcard{
+  position:relative;overflow:hidden;
+  background:#080810;cursor:none;
+  aspect-ratio:16/9;
+  display:block;
+  text-decoration:none;
+}
+.vcard.w2{grid-column:span 2}
 
-/* Drive / placeholder cards */
-.vcard-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#0a0a12,#141420)}
-.ph-icon{font-family:'Anton',sans-serif;font-size:42px;color:rgba(212,168,83,.15);letter-spacing:.06em}
-.ph-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.vcard:hover .vcard-ph{background:linear-gradient(135deg,#0d0d18,#1a1a28)}
+/* YouTube thumbnail image */
+.vcard img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.23,1,.32,1),filter .5s;
+  filter:brightness(.65) saturate(.8)
+}
+.vcard:hover img{transform:scale(1.06);filter:brightness(.28) saturate(.4)}
 
-/* overlay info */
-.vinfo{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 18px;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.3) 50%,transparent 100%);z-index:2;pointer-events:none;transition:opacity .3s}
+/* Drive / placeholder background */
+.vcard-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#0c0c18,#16162c);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  transition:background .3s
+}
+.vcard:hover .vcard-bg{background:linear-gradient(135deg,#111120,#1e1e38)}
+.bg-label{font-family:'Anton',sans-serif;font-size:clamp(22px,3vw,38px);color:rgba(212,168,83,.2);letter-spacing:.06em;text-align:center;line-height:1.1}
+.bg-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* overlay info — fades out on hover so play button shows */
+.vinfo{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:16px 18px;
+  background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.15) 55%,transparent 100%);
+  z-index:2;transition:opacity .35s
+}
+.vcard:hover .vinfo{opacity:0}
 .vtag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
 .vname{font-size:13px;font-weight:600;color:#fff}
-.vcard:hover .vinfo{opacity:0}
 
 /* play button */
-.vplay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);opacity:0;width:54px;height:54px;border-radius:50%;border:1.5px solid var(--gold);background:rgba(212,168,83,.12);display:flex;align-items:center;justify-content:center;z-index:3;transition:opacity .3s,transform .3s;pointer-events:none}
+.vplay{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.8);opacity:0;
+  width:54px;height:54px;border-radius:50%;
+  border:1.5px solid var(--gold);background:rgba(212,168,83,.12);
+  display:flex;align-items:center;justify-content:center;
+  z-index:3;transition:opacity .3s,transform .3s
+}
 .vplay svg{fill:var(--gold);width:18px;height:18px;margin-left:3px}
 .vcard:hover .vplay{opacity:1;transform:translate(-50%,-50%) scale(1)}
 
-/* ═══ LIGHTBOX ═══ */
-.lbox{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:900;display:none;align-items:center;justify-content:center;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.lbox.open{display:flex}
-.lbox-wrap{width:min(960px,94vw);position:relative}
-.lbox-ratio{position:relative;padding-top:56.25%;background:#000;border:1px solid rgba(255,255,255,.08)}
-.lbox-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.lbox-close{position:absolute;top:-46px;right:0;background:none;border:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted2);cursor:none;padding:8px 0;transition:color .2s}
-.lbox-close:hover{color:var(--gold)}
-/* Drive notice inside lightbox */
-.drive-notice{display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:20px;background:#050508;text-align:center;padding:40px}
-.drive-notice.show{display:flex}
-.drive-notice p{font-size:14px;color:var(--muted2);line-height:1.7;max-width:400px}
-.drive-open-btn{display:inline-block;background:var(--gold);color:#07070a;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:14px 32px;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:background .2s}
-.drive-open-btn:hover{background:var(--gold2)}
+/* hover badge — "Watch on YouTube" / "Watch on Drive" */
+.vbadge{
+  position:absolute;top:14px;right:14px;z-index:3;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);background:rgba(0,0,0,.7);border:1px solid rgba(212,168,83,.3);
+  padding:5px 10px;opacity:0;transform:translateY(-4px);
+  transition:opacity .3s,transform .3s
+}
+.vcard:hover .vbadge{opacity:1;transform:translateY(0)}
 
-/* ═══ ABOUT ═══ */
+/* ABOUT */
 .about{background:var(--bg)}
 .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:84px;align-items:start}
 .about-h{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.8vw,52px);line-height:1.18;font-weight:300;font-style:italic;margin-bottom:26px}
@@ -140,7 +168,7 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(22px);-webkit-back
 .exp-yr{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.06em;white-space:nowrap;padding-top:3px}
 .big5{font-family:'Anton',sans-serif;font-size:160px;line-height:1;color:rgba(255,255,255,.018);position:absolute;bottom:-20px;right:-12px;user-select:none;pointer-events:none}
 
-/* ═══ SERVICES ═══ */
+/* SERVICES */
 .services{background:var(--bg2)}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:56px}
 .svc{background:var(--bg2);padding:42px 34px;position:relative;overflow:hidden;transition:background .3s}
@@ -152,7 +180,7 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(22px);-webkit-back
 .svc-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.23,1,.32,1)}
 .svc:hover .svc-bar{transform:scaleX(1)}
 
-/* ═══ PROCESS ═══ */
+/* PROCESS */
 .process{background:var(--bg)}
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:56px;position:relative}
 .proc-grid::before{content:'';position:absolute;top:21px;left:12%;right:12%;height:1px;background:var(--border)}
@@ -162,14 +190,14 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(22px);-webkit-back
 .proc-title{font-size:14px;font-weight:700;margin-bottom:9px}
 .proc-desc{font-size:12px;line-height:1.72;color:var(--muted2)}
 
-/* ═══ QUOTE ═══ */
+/* QUOTE */
 .quote-sec{padding:96px 60px;background:var(--bg2);text-align:center;position:relative;overflow:hidden}
 .quote-bg-txt{position:absolute;top:-60px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:380px;line-height:1;color:rgba(212,168,83,.025);pointer-events:none;user-select:none}
 .quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.2vw,42px);line-height:1.38;font-style:italic;font-weight:300;max-width:840px;margin:0 auto 28px;color:rgba(237,234,224,.88)}
 .quote-by{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
 .quote-by span{color:var(--gold)}
 
-/* ═══ BOOKING ═══ */
+/* BOOKING */
 .booking{background:var(--bg);position:relative;overflow:hidden}
 .booking-bgtxt{position:absolute;top:50%;right:-60px;transform:translateY(-50%);font-family:'Anton',sans-serif;font-size:260px;line-height:1;color:rgba(255,255,255,.012);pointer-events:none;user-select:none}
 .booking-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:start}
@@ -196,23 +224,18 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(22px);-webkit-back
 .fg select option{background:#0d0d11;color:var(--text)}
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold)}
 .fg input::placeholder,.fg textarea::placeholder{color:var(--muted)}
-.fg textarea{min-height:108px}
-
-/* The submit is now a real <a> tag that we update href on, styled as button */
-.f-submit-wrap{display:flex;flex-direction:column;gap:12px}
+.fg textarea{min-height:110px}
 #sendBtn{
-  display:inline-block;align-self:flex-start;
-  background:var(--gold);color:#07070a;
+  align-self:flex-start;background:var(--gold);color:#07070a;border:none;
   font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;
-  padding:16px 38px;text-decoration:none;
+  letter-spacing:.2em;text-transform:uppercase;padding:16px 38px;
+  cursor:none;
   clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
-  transition:background .2s,transform .15s;
-  border:none;cursor:none;
+  transition:background .2s,transform .15s
 }
 #sendBtn:hover{background:var(--gold2);transform:translateY(-2px)}
 .f-ok{display:none;padding:14px 18px;border:1px solid rgba(212,168,83,.35);background:rgba(212,168,83,.06);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--gold);line-height:1.6}
-.f-err{display:none;padding:14px 18px;border:1px solid rgba(200,60,60,.35);background:rgba(200,60,60,.06);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:#e07070;line-height:1.6}
+.f-err{display:none;padding:14px 18px;border:1px solid rgba(200,60,60,.4);background:rgba(200,60,60,.07);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:#e08080;line-height:1.6}
 
 /* FOOTER */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
@@ -235,15 +258,20 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
   .hero-foot{flex-direction:column;align-items:flex-start;gap:30px}
   .hero-stats{gap:28px}
   .sec{padding:80px 22px}
-  .vgrid{grid-template-columns:1fr}
-  .vcard.w2{grid-column:span 1;aspect-ratio:16/9}
+  .vgrid{grid-template-columns:1fr 1fr}
+  .vcard.w2{grid-column:span 2}
   .about-grid{grid-template-columns:1fr;gap:48px}.big5{display:none}
-  .svc-grid{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
   .proc-grid{grid-template-columns:1fr 1fr}.proc-grid::before{display:none}
   .booking-grid{grid-template-columns:1fr;gap:52px}.booking-bgtxt{display:none}
   .f-row{grid-template-columns:1fr}
   footer{padding:36px 22px;flex-direction:column;align-items:center;text-align:center}
   .quote-sec{padding:72px 22px}
+}
+@media(max-width:560px){
+  .vgrid{grid-template-columns:1fr}
+  .vcard.w2{grid-column:span 1}
+  .svc-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -284,7 +312,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
 <div class="ticker-wrap">
   <div class="ticker-track">
     <div class="tick"><span class="tick-dot"></span>CINEMATIC EDITING</div>
-    <div class="tick"><span class="tick-dot"></span>COLOR GRADING</div>
     <div class="tick"><span class="tick-dot"></span>DAVINCI RESOLVE</div>
     <div class="tick"><span class="tick-dot"></span>SPORTS CONTENT</div>
     <div class="tick"><span class="tick-dot"></span>REELS &amp; SHORTS</div>
@@ -292,7 +319,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
     <div class="tick"><span class="tick-dot"></span>BRAND VIDEOS</div>
     <div class="tick"><span class="tick-dot"></span>MOTION GRAPHICS</div>
     <div class="tick"><span class="tick-dot"></span>CINEMATIC EDITING</div>
-    <div class="tick"><span class="tick-dot"></span>COLOR GRADING</div>
     <div class="tick"><span class="tick-dot"></span>DAVINCI RESOLVE</div>
     <div class="tick"><span class="tick-dot"></span>SPORTS CONTENT</div>
     <div class="tick"><span class="tick-dot"></span>REELS &amp; SHORTS</div>
@@ -302,7 +328,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
   </div>
 </div>
 
-<!-- WORK -->
+<!-- ══════════════ WORK ══════════════ -->
 <section class="work sec" id="work">
   <div class="work-top rv">
     <div>
@@ -314,109 +340,90 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
 
   <div class="vgrid rv d1">
 
-    <!-- 01 YouTube WIDE — thumbnail from YouTube CDN -->
-    <div class="vcard w2" onclick="openYT('7iF0aMuY6PI')">
-      <img class="thumb" src="https://i.ytimg.com/vi/7iF0aMuY6PI/hqdefault.jpg" alt="Edit 01"
-           onerror="this.src='https://i.ytimg.com/vi/7iF0aMuY6PI/mqdefault.jpg'"/>
+    <!-- ── YouTube cards: open on YouTube ── -->
+    <!-- Each card is a plain <a target="_blank"> — guaranteed to work -->
+
+    <a class="vcard w2" href="https://www.youtube.com/watch?v=7iF0aMuY6PI" target="_blank" rel="noopener">
+      <img src="https://i.ytimg.com/vi/7iF0aMuY6PI/hqdefault.jpg" alt="Cinematic Showreel"/>
       <div class="vinfo"><div class="vtag">Featured — 01</div><div class="vname">Cinematic Showreel</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on YouTube</div>
+    </a>
 
-    <!-- 02 YouTube -->
-    <div class="vcard" onclick="openYT('FFuEp2kLN2I')">
-      <img class="thumb" src="https://i.ytimg.com/vi/FFuEp2kLN2I/hqdefault.jpg" alt="Edit 02"
-           onerror="this.src='https://i.ytimg.com/vi/FFuEp2kLN2I/mqdefault.jpg'"/>
+    <a class="vcard" href="https://www.youtube.com/watch?v=FFuEp2kLN2I" target="_blank" rel="noopener">
+      <img src="https://i.ytimg.com/vi/FFuEp2kLN2I/hqdefault.jpg" alt="Motion Reel"/>
       <div class="vinfo"><div class="vtag">Edit — 02</div><div class="vname">Motion Reel</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on YouTube</div>
+    </a>
 
-    <!-- 03 YouTube -->
-    <div class="vcard" onclick="openYT('yFfvWJ4ijwo')">
-      <img class="thumb" src="https://i.ytimg.com/vi/yFfvWJ4ijwo/hqdefault.jpg" alt="Edit 03"
-           onerror="this.src='https://i.ytimg.com/vi/yFfvWJ4ijwo/mqdefault.jpg'"/>
+    <a class="vcard" href="https://www.youtube.com/watch?v=yFfvWJ4ijwo" target="_blank" rel="noopener">
+      <img src="https://i.ytimg.com/vi/yFfvWJ4ijwo/hqdefault.jpg" alt="Emotional Cut"/>
       <div class="vinfo"><div class="vtag">Edit — 03</div><div class="vname">Emotional Cut</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on YouTube</div>
+    </a>
 
-    <!-- 04 YouTube -->
-    <div class="vcard" onclick="openYT('Vbdw70LQgwA')">
-      <img class="thumb" src="https://i.ytimg.com/vi/Vbdw70LQgwA/hqdefault.jpg" alt="Edit 04"
-           onerror="this.src='https://i.ytimg.com/vi/Vbdw70LQgwA/mqdefault.jpg'"/>
+    <a class="vcard" href="https://www.youtube.com/watch?v=Vbdw70LQgwA" target="_blank" rel="noopener">
+      <img src="https://i.ytimg.com/vi/Vbdw70LQgwA/hqdefault.jpg" alt="High-Energy Reel"/>
       <div class="vinfo"><div class="vtag">Edit — 04</div><div class="vname">High-Energy Reel</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on YouTube</div>
+    </a>
 
-    <!-- 05 YouTube WIDE -->
-    <div class="vcard w2" onclick="openYT('Uxw-Vk4BZQQ')">
-      <img class="thumb" src="https://i.ytimg.com/vi/Uxw-Vk4BZQQ/hqdefault.jpg" alt="Edit 05"
-           onerror="this.src='https://i.ytimg.com/vi/Uxw-Vk4BZQQ/mqdefault.jpg'"/>
+    <a class="vcard w2" href="https://www.youtube.com/watch?v=Uxw-Vk4BZQQ" target="_blank" rel="noopener">
+      <img src="https://i.ytimg.com/vi/Uxw-Vk4BZQQ/hqdefault.jpg" alt="Dynamic Sequence"/>
       <div class="vinfo"><div class="vtag">Edit — 05</div><div class="vname">Dynamic Sequence</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on YouTube</div>
+    </a>
 
-    <!-- 06 YouTube -->
-    <div class="vcard" onclick="openYT('RaEjQFuOjyA')">
-      <img class="thumb" src="https://i.ytimg.com/vi/RaEjQFuOjyA/hqdefault.jpg" alt="Edit 06"
-           onerror="this.src='https://i.ytimg.com/vi/RaEjQFuOjyA/mqdefault.jpg'"/>
+    <a class="vcard" href="https://www.youtube.com/watch?v=RaEjQFuOjyA" target="_blank" rel="noopener">
+      <img src="https://i.ytimg.com/vi/RaEjQFuOjyA/hqdefault.jpg" alt="Signature Cut"/>
       <div class="vinfo"><div class="vtag">Edit — 06</div><div class="vname">Signature Cut</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on YouTube</div>
+    </a>
 
-    <!-- 07 Drive -->
-    <div class="vcard" onclick="openDrive('1EchFcEaNopK9Xu8NJkYuttKhcoxaJsAf','Exclusive Showcase')">
-      <div class="vcard-ph"><div class="ph-icon">EDIT</div><div class="ph-sub">Drive · 07</div></div>
+    <!-- ── Drive cards: open on Google Drive ── -->
+
+    <a class="vcard" href="https://drive.google.com/file/d/1EchFcEaNopK9Xu8NJkYuttKhcoxaJsAf/view" target="_blank" rel="noopener">
+      <div class="vcard-bg"><div class="bg-label">EXCLUSIVE<br/>SHOWCASE</div><div class="bg-sub">Drive Edit · 07</div></div>
       <div class="vinfo"><div class="vtag">Drive Edit — 07</div><div class="vname">Exclusive Showcase</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on Drive</div>
+    </a>
 
-    <!-- 08 Drive — Courtingo Edit 1 -->
-    <div class="vcard" onclick="openDrive('1PTjCXRTThj3avXZNh8q9P3Fou-0Hvbn2','Courtingo Edit 1')">
-      <div class="vcard-ph"><div class="ph-icon">COURT</div><div class="ph-sub">Courtingo Edit 1</div></div>
+    <a class="vcard" href="https://drive.google.com/file/d/1PTjCXRTThj3avXZNh8q9P3Fou-0Hvbn2/view" target="_blank" rel="noopener">
+      <div class="vcard-bg"><div class="bg-label">COURTINGO<br/>EDIT 1</div><div class="bg-sub">Client Work · 08</div></div>
       <div class="vinfo"><div class="vtag">Courtingo — 08</div><div class="vname">Courtingo Edit 1</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on Drive</div>
+    </a>
 
-    <!-- 09 Drive — Editing.editig -->
-    <div class="vcard" onclick="openDrive('1WRq3Sjnuwcy-UAYyH6sszOs4DW4q2R-4','Editing Showcase')">
-      <div class="vcard-ph"><div class="ph-icon">EDIT</div><div class="ph-sub">Drive · 09</div></div>
+    <a class="vcard" href="https://drive.google.com/file/d/1WRq3Sjnuwcy-UAYyH6sszOs4DW4q2R-4/view" target="_blank" rel="noopener">
+      <div class="vcard-bg"><div class="bg-label">EDITING<br/>SHOWCASE</div><div class="bg-sub">Drive Edit · 09</div></div>
       <div class="vinfo"><div class="vtag">Drive Edit — 09</div><div class="vname">Editing Showcase</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on Drive</div>
+    </a>
 
-    <!-- 10 Drive WIDE — gfgfgfrgfgfg -->
-    <div class="vcard w2" onclick="openDrive('16bGoB1dJT7c61n39tzcc24n2wvqN4H3d','Latest Work')">
-      <div class="vcard-ph"><div class="ph-icon">DRIVE</div><div class="ph-sub">Drive Edit · 10</div></div>
+    <a class="vcard w2" href="https://drive.google.com/file/d/16bGoB1dJT7c61n39tzcc24n2wvqN4H3d/view" target="_blank" rel="noopener">
+      <div class="vcard-bg"><div class="bg-label">LATEST WORK</div><div class="bg-sub">Drive Edit · 10</div></div>
       <div class="vinfo"><div class="vtag">Drive Edit — 10</div><div class="vname">Latest Work</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on Drive</div>
+    </a>
 
-    <!-- 11 Drive — someting somingth hsid44 -->
-    <div class="vcard" onclick="openDrive('1KeY8_R_bOS3VpORLShvV5-9Oq-TNFtcz','Special Cut')">
-      <div class="vcard-ph"><div class="ph-icon">EDIT</div><div class="ph-sub">Drive · 11</div></div>
+    <a class="vcard" href="https://drive.google.com/file/d/1KeY8_R_bOS3VpORLShvV5-9Oq-TNFtcz/view" target="_blank" rel="noopener">
+      <div class="vcard-bg"><div class="bg-label">SPECIAL<br/>CUT</div><div class="bg-sub">Drive Edit · 11</div></div>
       <div class="vinfo"><div class="vtag">Drive Edit — 11</div><div class="vname">Special Cut</div></div>
       <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    </div>
+      <div class="vbadge">▶ Watch on Drive</div>
+    </a>
 
   </div>
 </section>
-
-<!-- LIGHTBOX -->
-<div class="lbox" id="lbox">
-  <div class="lbox-wrap">
-    <button class="lbox-close" onclick="closeLbox()">✕ &ensp;Close</button>
-    <div class="lbox-ratio" id="lboxRatio">
-      <iframe id="lboxFrame" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-      <!-- Drive fallback notice shown when iframe can't load -->
-      <div class="drive-notice" id="driveNotice">
-        <div style="font-family:'Anton',sans-serif;font-size:32px;color:var(--gold);letter-spacing:.1em">DRIVE VIDEO</div>
-        <p>Google Drive videos may need you to be signed in to play. Click below to open it directly in Google Drive.</p>
-        <a id="driveOpenBtn" class="drive-open-btn" href="#" target="_blank" rel="noopener">Open in Google Drive ↗</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- lbox backdrop click -->
-<script>document.getElementById('lbox').addEventListener('click',function(e){if(e.target===this)closeLbox();});</script>
 
 <!-- ABOUT -->
 <section class="about sec" id="about">
@@ -431,7 +438,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
         <div class="tools-lbl">Tools &amp; Skills</div>
         <div class="tools-row">
           <div class="ttag">DaVinci Resolve</div>
-          <div class="ttag">Color Grading</div>
           <div class="ttag">Motion Graphics</div>
           <div class="ttag">Reels &amp; Shorts</div>
           <div class="ttag">Sports Content</div>
@@ -470,12 +476,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
   <div class="sec-label rv">Services</div>
   <h2 class="sec-h rv">WHAT I <span class="it">Do</span></h2>
   <div class="svc-grid">
-    <div class="svc rv d1"><div class="svc-num">01</div><div class="svc-name">Cinematic Editing</div><div class="svc-desc">Full-length cinematic videos with seamless cuts, story arc, and professional color science built in DaVinci Resolve.</div><div class="svc-bar"></div></div>
-    <div class="svc rv d2"><div class="svc-num">02</div><div class="svc-name">Reels &amp; Shorts</div><div class="svc-desc">Algorithm-ready short-form content for Instagram, YouTube Shorts, and TikTok. Addictive hooks, sharp pacing, maximum watch time.</div><div class="svc-bar"></div></div>
-    <div class="svc rv d3"><div class="svc-num">03</div><div class="svc-name">Sports Content</div><div class="svc-desc">High-energy highlight reels, hype videos, and branded sports content with punchy transitions. Proven with Courtingo.</div><div class="svc-bar"></div></div>
-    <div class="svc rv d1"><div class="svc-num">04</div><div class="svc-name">Motion Graphics</div><div class="svc-desc">Custom animated titles, transitions, and VFX using DaVinci's Fusion compositor to lift your content from good to unforgettable.</div><div class="svc-bar"></div></div>
-    <div class="svc rv d2"><div class="svc-num">05</div><div class="svc-name">Brand Videos</div><div class="svc-desc">Polished promotional videos and ad-ready content aligned to your brand — exported and optimised for any platform.</div><div class="svc-bar"></div></div>
-    <div class="svc rv d3"><div class="svc-num">06</div><div class="svc-name">Color Grading</div><div class="svc-desc">Signature looks built in DaVinci's node-based pipeline. Film emulation, bold cinematic grades, shot-to-shot consistency.</div><div class="svc-bar"></div></div>
+    <div class="svc rv d1"><div class="svc-num">01</div><div class="svc-name">Cinematic Editing</div><div class="svc-desc">Full-length cinematic videos with seamless cuts and a story arc built entirely in DaVinci Resolve — every frame serves the emotion.</div><div class="svc-bar"></div></div>
+    <div class="svc rv d2"><div class="svc-num">02</div><div class="svc-name">Reels &amp; Shorts</div><div class="svc-desc">Algorithm-ready short-form content for Instagram, YouTube Shorts, and TikTok. Addictive hooks, sharp pacing, maximum retention.</div><div class="svc-bar"></div></div>
+    <div class="svc rv d3"><div class="svc-num">03</div><div class="svc-name">Sports Content</div><div class="svc-desc">High-energy highlight reels, hype videos, and branded sports content. Punchy transitions and hard-hitting audio. Proven with Courtingo.</div><div class="svc-bar"></div></div>
+    <div class="svc rv d1"><div class="svc-num">04</div><div class="svc-name">Motion Graphics</div><div class="svc-desc">Custom animated titles, transitions, and VFX using DaVinci's Fusion compositor — lifting your content from good to unforgettable.</div><div class="svc-bar"></div></div>
+    <div class="svc rv d2"><div class="svc-num">05</div><div class="svc-name">Brand Videos</div><div class="svc-desc">Polished promotional videos and ad-ready content aligned to your brand identity — optimised and delivered for any platform.</div><div class="svc-bar"></div></div>
+    <div class="svc rv d3"><div class="svc-num">06</div><div class="svc-name">Long-Form Editing</div><div class="svc-desc">YouTube videos, documentaries, interviews, and podcast edits — structured for watch time and built to keep people watching.</div><div class="svc-bar"></div></div>
   </div>
 </section>
 
@@ -484,7 +490,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
   <div class="sec-label rv">How I Work</div>
   <h2 class="sec-h rv">THE <span class="it">Process</span></h2>
   <div class="proc-grid">
-    <div class="proc-step rv d1"><div class="proc-circ">01</div><div class="proc-title">Discovery</div><div class="proc-desc">We discuss goals, vision, references, and the story you need to tell.</div></div>
+    <div class="proc-step rv d1"><div class="proc-circ">01</div><div class="proc-title">Discovery</div><div class="proc-desc">We discuss your goals, vision, references, and the story you need to tell.</div></div>
     <div class="proc-step rv d2"><div class="proc-circ">02</div><div class="proc-title">Concept</div><div class="proc-desc">I plan pacing, music direction, visual style, and the full narrative arc.</div></div>
     <div class="proc-step rv d3"><div class="proc-circ">03</div><div class="proc-title">Edit &amp; Refine</div><div class="proc-desc">First cut delivered, feedback round, revisions until every frame is right.</div></div>
     <div class="proc-step rv d4"><div class="proc-circ">04</div><div class="proc-title">Delivery</div><div class="proc-desc">Final export in your format, platform-optimised and ready to publish.</div></div>
@@ -514,8 +520,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
     </div>
 
     <div class="rv d2">
-      <!-- NOT a <form> — avoids all popup-blocker issues -->
-      <div class="bform" id="bform">
+      <div class="bform">
         <div class="f-row">
           <div class="fg"><label>Your Name *</label><input type="text" id="f-name" placeholder="Alex Johnson"/></div>
           <div class="fg"><label>Your Email *</label><input type="email" id="f-email" placeholder="alex@example.com"/></div>
@@ -529,6 +534,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
             <option>Sports Content</option>
             <option>Motion Graphics</option>
             <option>Brand Video</option>
+            <option>Long-Form Editing</option>
             <option>Other</option>
           </select>
         </div>
@@ -557,14 +563,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
           </div>
         </div>
         <div class="fg"><label>Project Details *</label><textarea id="f-msg" placeholder="Describe your project — footage type, platform, style references, goals..."></textarea></div>
-        <div class="f-submit-wrap">
-          <!-- This <a> tag gets its href built dynamically — no popup blocker issues -->
-          <a id="sendBtn" href="mailto:takkelapallyharshith5@gmail.com" onclick="return buildMailto(event)">
-            Send Project Brief →
-          </a>
-          <div class="f-ok" id="fOk">✓ &nbsp;Your email client is opening with your brief pre-filled. Just hit Send!</div>
-          <div class="f-err" id="fErr">⚠ &nbsp;Please fill in Name, Email, Project Type, and Project Details.</div>
-        </div>
+        <button id="sendBtn" onclick="sendEmail()">Send Project Brief →</button>
+        <div class="f-ok" id="fOk">✓ &nbsp;Your email app is opening with the brief ready — just hit Send!</div>
+        <div class="f-err" id="fErr">⚠ &nbsp;Please fill in Name, Email, Project Type, and Project Details.</div>
       </div>
     </div>
   </div>
@@ -582,117 +583,133 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
 </footer>
 
 <script>
-/* ── CURSOR ── */
+/* CURSOR */
 const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(loop);})();
-document.querySelectorAll('a,button,.vcard,.svc,.proc-step,.ttag,.nav-cta').forEach(el=>{
+document.querySelectorAll('a,button,.svc,.proc-step,.ttag').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });
 
-/* ── NAV ── */
+/* NAV */
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
 },{passive:true});
 
-/* ── REVEAL ── */
+/* REVEAL */
 document.querySelectorAll('.rv').forEach(el=>{
   new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
   },{threshold:.07}).observe(el);
 });
 
-/* ── LIGHTBOX: YouTube ── */
-function openYT(id){
-  document.getElementById('driveNotice').classList.remove('show');
-  document.getElementById('lboxFrame').style.display='block';
-  document.getElementById('lboxFrame').src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';
-  document.getElementById('lbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
+/* ══════════════════════════════════════════
+   SEND EMAIL
+   Uses a hidden <a> with mailto: href.
+   This is the ONLY method guaranteed to open
+   the user's email app on every device/browser.
+══════════════════════════════════════════ */
+function sendEmail(){<script>
+async function sendEmail(){
 
-/* ── LIGHTBOX: Drive ── */
-function openDrive(id, title){
-  // Try the preview embed first
-  const frame = document.getElementById('lboxFrame');
-  const notice = document.getElementById('driveNotice');
-  const openBtn = document.getElementById('driveOpenBtn');
-
-  // Set the direct Drive link on the fallback button
-  openBtn.href = 'https://drive.google.com/file/d/'+id+'/view';
-
-  // Show the frame
-  frame.style.display = 'block';
-  notice.classList.remove('show');
-  frame.src = 'https://drive.google.com/file/d/'+id+'/preview';
-
-  // After 4 seconds, if frame seems blank show the fallback
-  // (Drive blocks embedding if file isn't set to public)
-  clearTimeout(window._driveTimer);
-  window._driveTimer = setTimeout(()=>{
-    // Show drive notice as a helper alongside the iframe
-    notice.classList.add('show');
-    frame.style.display='none';
-  }, 5000);
-
-  document.getElementById('lbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-/* ── CLOSE LIGHTBOX ── */
-function closeLbox(){
-  document.getElementById('lbox').classList.remove('open');
-  clearTimeout(window._driveTimer);
-  setTimeout(()=>{
-    document.getElementById('lboxFrame').src='';
-    document.getElementById('driveNotice').classList.remove('show');
-    document.getElementById('lboxFrame').style.display='block';
-  },300);
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLbox();});
-
-/* ── MAILTO FORM ── */
-function buildMailto(e){
-  const name  = document.getElementById('f-name').value.trim();
+  const name = document.getElementById('f-name').value.trim();
   const email = document.getElementById('f-email').value.trim();
-  const type  = document.getElementById('f-type').value;
-  const budget= document.getElementById('f-budget').value;
+  const type = document.getElementById('f-type').value;
+  const budget = document.getElementById('f-budget').value;
   const tline = document.getElementById('f-timeline').value;
-  const msg   = document.getElementById('f-msg').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
 
-  const ok  = document.getElementById('fOk');
+  const ok = document.getElementById('fOk');
   const err = document.getElementById('fErr');
-  ok.style.display='none'; err.style.display='none';
 
-  if(!name || !email || !type || !msg){
+  ok.style.display='none';
+  err.style.display='none';
+
+  if(!name || !email || !type || !msg'){
     err.style.display='block';
-    e.preventDefault();
-    return false;
+    return;
+  }
+
+  try{
+
+    const response = await fetch(
+      'https://formspree.io/f/YOUR_FORM_ID',
+      {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'Accept':'application/json'
+        },
+        body:JSON.stringify({
+          name,
+          email,
+          service:type,
+          budget,
+          timeline:tline,
+          message:msg
+        })
+      }
+    );
+
+    if(response.ok){
+
+      ok.innerHTML='✓ Message sent successfully!';
+      ok.style.display='block';
+
+      document.getElementById('f-name').value='';
+      document.getElementById('f-email').value='';
+      document.getElementById('f-type').value='';
+      document.getElementById('f-budget').value='';
+      document.getElementById('f-timeline').value='';
+      document.getElementById('f-msg').value='';
+
+    }else{
+      throw new Error();
+    }
+
+  }catch(e){
+
+    err.innerHTML='⚠ Failed to send message.';
+    err.style.display='block';
+
+  }
+
+}
+</script>
   }
 
   const subject = 'Project Inquiry from ' + name;
   const body =
     'Hi Harshith,\n\n' +
-    'I found your portfolio and would love to work with you.\n\n' +
+    'I found your portfolio and I would love to work with you.\n\n' +
     '--- PROJECT BRIEF ---\n' +
     'Name: '    + name  + '\n' +
     'Email: '   + email + '\n' +
     'Service: ' + type  + '\n' +
     (budget ? 'Budget: '   + budget + '\n' : '') +
     (tline  ? 'Timeline: ' + tline  + '\n' : '') +
-    '\nDetails:\n' + msg + '\n\n' +
-    'Looking forward to hearing from you!\n— ' + name;
+    '\nProject Details:\n' + msg + '\n\n' +
+    'Looking forward to working with you!\n— ' + name;
 
-  // Update the href of the clicked <a> element
-  e.currentTarget.href = 'mailto:takkelapallyharshith5@gmail.com'
-    + '?subject=' + encodeURIComponent(subject)
-    + '&body='    + encodeURIComponent(body);
+  const mailtoURL =
+    'mailto:takkelapallyharshith5@gmail.com' +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body='    + encodeURIComponent(body);
+
+  /* Create a temporary invisible <a> and click it —
+     this is more reliable than window.location.href
+     and works even when the page is inside an iframe */
+  const link = document.createElement('a');
+  link.href = mailtoURL;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 
   ok.style.display = 'block';
-  // reset after showing
+
   setTimeout(()=>{
     document.getElementById('f-name').value='';
     document.getElementById('f-email').value='';
@@ -701,9 +718,7 @@ function buildMailto(e){
     document.getElementById('f-timeline').value='';
     document.getElementById('f-msg').value='';
     ok.style.display='none';
-  }, 6000);
-
-  return true; // allow the default <a> navigation (opens mail client)
+  }, 3000);
 }
 </script>
 </body>
