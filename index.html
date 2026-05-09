@@ -611,7 +611,8 @@ document.querySelectorAll('.rv').forEach(el=>{
    This is the ONLY method guaranteed to open
    the user's email app on every device/browser.
 ══════════════════════════════════════════ */
-function sendEmail(){<script>
+
+<script>
 async function sendEmail(){
 
   const name = document.getElementById('f-name').value.trim();
@@ -678,8 +679,6 @@ async function sendEmail(){
 
 }
 </script>
-  }
-
   const subject = 'Project Inquiry from ' + name;
   const body =
     'Hi Harshith,\n\n' +
