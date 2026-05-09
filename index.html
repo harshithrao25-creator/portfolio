@@ -682,5 +682,104 @@ function sendEmail(){
   }
  
 </script>
+  <!-- VIDEO POPUP -->
+<div id="lightbox">
+
+  <div id="lightboxClose" onclick="closeVideo()">✕</div>
+
+  <iframe
+    id="videoFrame"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+</div>
+
+<style>
+
+#lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.94);
+  z-index:999999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+#lightbox.show{
+  display:flex;
+}
+
+#videoFrame{
+  width:90vw;
+  height:90vh;
+  border:none;
+  border-radius:12px;
+}
+
+#lightboxClose{
+  position:absolute;
+  top:20px;
+  right:30px;
+  color:white;
+  font-size:40px;
+  cursor:pointer;
+  z-index:2;
+}
+
+</style>
+
+<script>
+
+function openYT(id){
+
+  const box =
+    document.getElementById('lightbox');
+
+  const frame =
+    document.getElementById('videoFrame');
+
+  frame.src =
+    'https://www.youtube.com/embed/' +
+    id +
+    '?autoplay=1';
+
+  box.classList.add('show');
+
+  document.body.style.overflow='hidden';
+}
+
+function openDrive(id){
+
+  const box =
+    document.getElementById('lightbox');
+
+  const frame =
+    document.getElementById('videoFrame');
+
+  frame.src =
+    'https://drive.google.com/file/d/' +
+    id +
+    '/preview';
+
+  box.classList.add('show');
+
+  document.body.style.overflow='hidden';
+}
+
+function closeVideo(){
+
+  document.getElementById('lightbox')
+    .classList.remove('show');
+
+  document.getElementById('videoFrame')
+    .src='';
+
+  document.body.style.overflow='';
+
+}
+
+</script>
 </body>
 </html>
