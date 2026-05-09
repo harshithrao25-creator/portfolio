@@ -612,21 +612,73 @@ document.querySelectorAll('.rv').forEach(el=>{
    the user's email app on every device/browser.
 ══════════════════════════════════════════ */
 function sendEmail(){
-  const name   = (document.getElementById('f-name').value   || '').trim();
-  const email  = (document.getElementById('f-email').value  || '').trim();
-  const type   = (document.getElementById('f-type').value   || '').trim();
-  const budget = (document.getElementById('f-budget').value || '').trim();
-  const tline  = (document.getElementById('f-timeline').value|| '').trim();
-  const msg    = (document.getElementById('f-msg').value    || '').trim();
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const type = document.getElementById('f-type').value;
+  const budget = document.getElementById('f-budget').value;
+  const tline = document.getElementById('f-timeline').value;
+  const msg = document.getElementById('f-msg').value.trim();
 
-  const ok  = document.getElementById('fOk');
+  const ok = document.getElementById('fOk');
   const err = document.getElementById('fErr');
+
   ok.style.display='none';
   err.style.display='none';
 
   if(!name || !email || !type || !msg){
     err.style.display='block';
     return;
+  }
+
+  fetch('https://formspree.io/f/mvzlwnvl', {
+
+    method:'POST',
+
+    headers:{
+      'Content-Type':'application/json',
+      'Accept':'application/json'
+    },
+
+    body:JSON.stringify({
+      name:name,
+      email:email,
+      service:type,
+      budget:budget,
+      timeline:tline,
+      message:msg
+    })
+
+  })
+
+  .then(response => {
+
+    if(response.ok){
+
+      ok.innerHTML='✓ Message sent successfully!';
+      ok.style.display='block';
+
+      document.getElementById('f-name').value='';
+      document.getElementById('f-email').value='';
+      document.getElementById('f-type').value='';
+      document.getElementById('f-budget').value='';
+      document.getElementById('f-timeline').value='';
+      document.getElementById('f-msg').value='';
+
+    } else {
+
+      err.innerHTML='⚠ Failed to send message.';
+      err.style.display='block';
+
+    }
+
+  })
+
+  .catch(() => {
+
+    err.innerHTML='⚠ Failed to send message.';
+    err.style.display='block';
+
+  });
   }
 
   const subject = 'Project Inquiry from ' + name;
