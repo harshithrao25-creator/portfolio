@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+,::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#07070a;--bg2:#0d0d11;--bg3:#131318;
   --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
@@ -82,13 +82,7 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(20px);border-color
 .work-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px}
 .work-cnt{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em}
 
-.vgrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  align-items:stretch;
-}
-
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 
 /* every card is an <a> — perfect 16:9 always */
 .vcard{
@@ -351,42 +345,42 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
     <img src="https://i.ytimg.com/vi/7iF0aMuY6PI/hqdefault.jpg" alt="Cinematic Showreel"/>
     <div class="vinfo"><div class="vtag">Featured — 01</div><div class="vname">Cinematic Showreel</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on YouTube</div>
+    <div class="vbadge">▶️ Watch on YouTube</div>
   </div>
 
   <div class="vcard" onclick="openYT('FFuEp2kLN2I')">
     <img src="https://i.ytimg.com/vi/FFuEp2kLN2I/hqdefault.jpg" alt="Motion Reel"/>
     <div class="vinfo"><div class="vtag">Edit — 02</div><div class="vname">Motion Reel</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on YouTube</div>
+    <div class="vbadge">▶️ Watch on YouTube</div>
   </div>
 
   <div class="vcard" onclick="openYT('yFfvWJ4ijwo')">
     <img src="https://i.ytimg.com/vi/yFfvWJ4ijwo/hqdefault.jpg" alt="Emotional Cut"/>
     <div class="vinfo"><div class="vtag">Edit — 03</div><div class="vname">Emotional Cut</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on YouTube</div>
+    <div class="vbadge">▶️ Watch on YouTube</div>
   </div>
 
   <div class="vcard" onclick="openYT('Vbdw70LQgwA')">
     <img src="https://i.ytimg.com/vi/Vbdw70LQgwA/hqdefault.jpg" alt="High-Energy Reel"/>
     <div class="vinfo"><div class="vtag">Edit — 04</div><div class="vname">High-Energy Reel</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on YouTube</div>
+    <div class="vbadge">▶️ Watch on YouTube</div>
   </div>
 
   <div class="vcard w2" onclick="openYT('Uxw-Vk4BZQQ')">
     <img src="https://i.ytimg.com/vi/Uxw-Vk4BZQQ/hqdefault.jpg" alt="Dynamic Sequence"/>
     <div class="vinfo"><div class="vtag">Edit — 05</div><div class="vname">Dynamic Sequence</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on YouTube</div>
+    <div class="vbadge">▶️ Watch on YouTube</div>
   </div>
 
   <div class="vcard" onclick="openYT('RaEjQFuOjyA')">
     <img src="https://i.ytimg.com/vi/RaEjQFuOjyA/hqdefault.jpg" alt="Signature Cut"/>
     <div class="vinfo"><div class="vtag">Edit — 06</div><div class="vname">Signature Cut</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on YouTube</div>
+    <div class="vbadge">▶️ Watch on YouTube</div>
   </div>
 
   <!-- GOOGLE DRIVE -->
@@ -395,35 +389,35 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
     <div class="vcard-bg"><div class="bg-label">EXCLUSIVE<br/>SHOWCASE</div><div class="bg-sub">Drive Edit · 07</div></div>
     <div class="vinfo"><div class="vtag">Drive Edit — 07</div><div class="vname">Exclusive Showcase</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on Drive</div>
+    <div class="vbadge">▶️ Watch on Drive</div>
   </div>
 
   <div class="vcard" onclick="openDrive('1PTjCXRTThj3avXZNh8q9P3Fou-0Hvbn2')">
     <div class="vcard-bg"><div class="bg-label">COURTINGO<br/>EDIT 1</div><div class="bg-sub">Client Work · 08</div></div>
     <div class="vinfo"><div class="vtag">Courtingo — 08</div><div class="vname">Courtingo Edit 1</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on Drive</div>
+    <div class="vbadge">▶️ Watch on Drive</div>
   </div>
 
   <div class="vcard" onclick="openDrive('1WRq3Sjnuwcy-UAYyH6sszOs4DW4q2R-4')">
     <div class="vcard-bg"><div class="bg-label">EDITING<br/>SHOWCASE</div><div class="bg-sub">Drive Edit · 09</div></div>
     <div class="vinfo"><div class="vtag">Drive Edit — 09</div><div class="vname">Editing Showcase</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on Drive</div>
+    <div class="vbadge">▶️ Watch on Drive</div>
   </div>
 
   <div class="vcard w2" onclick="openDrive('16bGoB1dJT7c61n39tzcc24n2wvqN4H3d')">
     <div class="vcard-bg"><div class="bg-label">LATEST WORK</div><div class="bg-sub">Drive Edit · 10</div></div>
     <div class="vinfo"><div class="vtag">Drive Edit — 10</div><div class="vname">Latest Work</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on Drive</div>
+    <div class="vbadge">▶️ Watch on Drive</div>
   </div>
 
   <div class="vcard" onclick="openDrive('1KeY8_R_bOS3VpORLShvV5-9Oq-TNFtcz')">
     <div class="vcard-bg"><div class="bg-label">SPECIAL<br/>CUT</div><div class="bg-sub">Drive Edit · 11</div></div>
     <div class="vinfo"><div class="vtag">Drive Edit — 11</div><div class="vname">Special Cut</div></div>
     <div class="vplay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-    <div class="vbadge">▶ Watch on Drive</div>
+    <div class="vbadge">▶️ Watch on Drive</div>
   </div>
 
 </div>
@@ -517,8 +511,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
       <h2 class="booking-h">LET'S<br/>CREATE<br/><span class="it">Together.</span></h2>
       <p class="booking-p">Have a project in mind? Fill in your brief and I'll get back to you within 24 hours. Let's make something impossible to ignore.</p>
       <div class="cinfo">
-        <div class="crow"><div class="cicon">✉</div><a href="mailto:takkelapallyharshith5@gmail.com">takkelapallyharshith5@gmail.com</a></div>
-        <div class="crow"><div class="cicon">⏱</div><span>Response within 24 hours</span></div>
+        <div class="crow"><div class="cicon">✉️</div><a href="mailto:takkelapallyharshith5@gmail.com">takkelapallyharshith5@gmail.com</a></div>
+        <div class="crow"><div class="cicon">⏱️</div><span>Response within 24 hours</span></div>
         <div class="crow"><div class="cicon">🎬</div><span>DaVinci Resolve specialist</span></div>
       </div>
     </div>
@@ -569,7 +563,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
         <div class="fg"><label>Project Details *</label><textarea id="f-msg" placeholder="Describe your project — footage type, platform, style references, goals..."></textarea></div>
         <button id="sendBtn" onclick="sendEmail()">Send Project Brief →</button>
         <div class="f-ok" id="fOk">✓ &nbsp;Your email app is opening with the brief ready — just hit Send!</div>
-        <div class="f-err" id="fErr">⚠ &nbsp;Please fill in Name, Email, Project Type, and Project Details.</div>
+        <div class="f-err" id="fErr">⚠️ &nbsp;Please fill in Name, Email, Project Type, and Project Details.</div>
       </div>
     </div>
   </div>
@@ -591,7 +585,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
 const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(loop);})();
+(function loop(){rx+=(mx-rx).1;ry+=(my-ry).1;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(loop);})();
 document.querySelectorAll('a,button,.svc,.proc-step,.ttag').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
@@ -670,7 +664,7 @@ function sendEmail(){
 
     } else {
 
-      err.innerHTML='⚠ Failed to send message.';
+      err.innerHTML='⚠️ Failed to send message.';
       err.style.display='block';
 
     }
@@ -679,7 +673,7 @@ function sendEmail(){
 
   .catch(() => {
 
-    err.innerHTML='⚠ Failed to send message.';
+    err.innerHTML='⚠️ Failed to send message.';
     err.style.display='block';
 
   });
