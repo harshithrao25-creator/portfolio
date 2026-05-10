@@ -17,8 +17,18 @@
   --gold:#d4a853;--gold2:#f0c96e;--glow:rgba(212,168,83,0.12);
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none}
+html,body{
+  width:100%;
+  overflow-x:hidden;
+}
 
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+}
 /* CURSOR */
 #cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
 #cur2{position:fixed;width:36px;height:36px;border:1px solid rgba(212,168,83,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s}
@@ -91,7 +101,9 @@ nav.scrolled{background:rgba(7,7,10,.95);backdrop-filter:blur(20px);border-color
   background:#080810;
   cursor:pointer;
   aspect-ratio:16/9;
-  height:320px;
+  width:100%;
+  height:auto;
+  min-height:220px;
   display:block;
   text-decoration:none;
 }
@@ -293,11 +305,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 60px
     grid-template-columns:1fr;
     gap:12px;
   }
-
-  .vcard{
-    height:220px;
-  }
-
 }
 </style>
 </head>
@@ -736,8 +743,10 @@ function sendEmail(){
 }
 
 #videoFrame{
-  width:90vw;
-  height:90vh;
+  width:95vw;
+  max-width:1000px;
+  aspect-ratio:16/9;
+  height:auto;
   border:none;
   border-radius:12px;
 }
