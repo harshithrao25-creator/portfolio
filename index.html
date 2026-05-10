@@ -749,6 +749,18 @@ function sendEmail(){
   height:auto;
   border:none;
   border-radius:12px;
+  background:#000;
+}
+
+@media(max-width:768px){
+
+  #videoFrame{
+    width:100vw;
+    height:56.25vw;
+    max-height:80vh;
+    border-radius:0;
+  }
+
 }
 
 #lightboxClose{
@@ -785,10 +797,20 @@ function openYT(id){
 
 function openDrive(id){
 
-  window.open(
-    'https://drive.google.com/file/d/' + id + '/view',
-    '_blank'
-  );
+  const box =
+    document.getElementById('lightbox');
+
+  const frame =
+    document.getElementById('videoFrame');
+
+  frame.src =
+    'https://drive.google.com/file/d/' +
+    id +
+    '/preview?usp=drivesdk';
+
+  box.classList.add('show');
+
+  document.body.style.overflow='hidden';
 
 }
 
