@@ -785,20 +785,11 @@ function openYT(id){
 
 function openDrive(id){
 
-  const box =
-    document.getElementById('lightbox');
+  window.open(
+    'https://drive.google.com/file/d/' + id + '/view',
+    '_blank'
+  );
 
-  const frame =
-    document.getElementById('videoFrame');
-
-  frame.src =
-    'https://drive.google.com/file/d/' +
-    id +
-    '/preview';
-
-  box.classList.add('show');
-
-  document.body.style.overflow='hidden';
 }
 
 function closeVideo(){
